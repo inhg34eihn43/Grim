@@ -1,22 +1,27 @@
 package ac.grim.grimac.checks.impl.flight;
 
 import ac.grim.grimac.checks.Check;
-import ac.grim.grimac.checks.type.PacketCheck;
+import ac.grim.grimac.checks.type.PositionCheck;
 import ac.grim.grimac.player.GrimPlayer;
-import com.github.retrooper.packetevents.event.PacketReceiveEvent;
-import com.github.retrooper.packetevents.wrapper.play.client.WrapperPlayClientPlayerFlying;
+import ac.grim.grimac.utils.anticheat.update.PositionUpdate;
 
-// This check catches 100% of cheaters.
-public class FlightA extends Check implements PacketCheck {
+public class FlightA extends Check implements PositionCheck {
     public FlightA(GrimPlayer player) {
         super(player);
     }
 
+    private int suspicious;
+
     @Override
-    public void onPacketReceive(PacketReceiveEvent event) {
-        // If the player sends a flying packet, but they aren't flying, then they are cheating.
-        if (WrapperPlayClientPlayerFlying.isFlying(event.getPacketType()) && !player.isFlying) {
-            flag();
+    public void onPositionUpdate(final PositionUpdate positionUpdate) {
+        if (positionUpdate.getTo() != positionUpdate.getFrom()) {
+            // is to constant Y position
+            if (positionUpdate.getTo().getY() == positionUpdate.getFrom().getY()) {
+                suspicious++;
+            }else {
+                suspicious = 0;
+            }
         }
     }
+
 }

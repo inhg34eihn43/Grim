@@ -184,6 +184,9 @@ public class GrimPlayer implements GrimUser {
     public long lastBlockPlaceUseItem = 0;
     public AtomicInteger cancelledPackets = new AtomicInteger(0);
 
+    //Suspicious
+
+
     public void onPacketCancel() {
         if (cancelledPackets.incrementAndGet() > spamThreshold) {
             LogUtil.info("Disconnecting " + getName() + " for spamming invalid packets, packets cancelled within a second " + cancelledPackets);

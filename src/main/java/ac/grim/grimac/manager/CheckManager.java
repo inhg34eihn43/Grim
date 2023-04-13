@@ -10,6 +10,7 @@ import ac.grim.grimac.checks.impl.combat.Reach;
 import ac.grim.grimac.checks.impl.crash.*;
 import ac.grim.grimac.checks.impl.exploit.ExploitA;
 import ac.grim.grimac.checks.impl.exploit.ExploitB;
+import ac.grim.grimac.checks.impl.flight.FlightA;
 import ac.grim.grimac.checks.impl.groundspoof.NoFallA;
 import ac.grim.grimac.checks.impl.misc.ClientBrand;
 import ac.grim.grimac.checks.impl.misc.FastBreak;
@@ -82,9 +83,13 @@ public class CheckManager {
                 .put(PostCheck.class, new PostCheck(player))
                 .put(FastBreak.class, new FastBreak(player))
                 .put(NoSlowB.class, new NoSlowB(player))
+
                 .put(SetbackBlocker.class, new SetbackBlocker(player)) // Must be last class otherwise we can't check while blocking packets
                 .build();
         positionCheck = new ImmutableClassToInstanceMap.Builder<PositionCheck>()
+
+                .put(FlightA.class,new FlightA(player))
+
                 .put(PredictionRunner.class, new PredictionRunner(player))
                 .put(CompensatedCooldown.class, new CompensatedCooldown(player))
                 .build();
