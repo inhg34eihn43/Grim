@@ -122,6 +122,10 @@ TimerVehicle:
 EntityControl:
   setbackvl: 25
 
+Flight:
+  A:
+    suspicious: 5
+
 Reach:
   # Cuanto deberíamos expandir las hit-boxes? 0.0005 debería detectar un reach de 3.0005+
   #

@@ -118,6 +118,10 @@ TimerVehicle:
 EntityControl:
   setbackvl: 25
 
+Flight:
+  A:
+    suspicious: 5
+
 Reach:
   # Um wie viel sollen wir die Hitboxen erweitern? 0,0005 sollte 3,0005+ Reichweite erkennen
   #
